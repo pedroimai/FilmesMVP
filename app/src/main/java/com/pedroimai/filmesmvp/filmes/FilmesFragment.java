@@ -45,7 +45,7 @@ public class FilmesFragment extends Fragment implements FilmesContract.View {
     @Override
     public void onResume() {
         super.onResume();
-        mActionsListener.carregarFilmes(false);
+        mActionsListener.carregarFilmes();
     }
 
 
@@ -61,7 +61,6 @@ public class FilmesFragment extends Fragment implements FilmesContract.View {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numColumns));
 
-        // Pull-to-refresh
         SwipeRefreshLayout swipeRefreshLayout =
                 (SwipeRefreshLayout) root.findViewById(R.id.refresh_layout);
         swipeRefreshLayout.setColorSchemeColors(
@@ -71,7 +70,7 @@ public class FilmesFragment extends Fragment implements FilmesContract.View {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mActionsListener.carregarFilmes(true);
+                mActionsListener.carregarFilmes();
             }
         });
         return root;
@@ -85,7 +84,6 @@ public class FilmesFragment extends Fragment implements FilmesContract.View {
         final SwipeRefreshLayout srl =
                 (SwipeRefreshLayout) getView().findViewById(R.id.refresh_layout);
 
-        // Make sure setRefreshing() is called after the layout is done with everything else.
         srl.post(new Runnable() {
             @Override
             public void run() {

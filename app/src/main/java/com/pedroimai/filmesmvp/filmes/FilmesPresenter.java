@@ -23,16 +23,8 @@ public class FilmesPresenter implements FilmesContract.UserActionsListener {
     }
 
     @Override
-    public void carregarFilmes(boolean forceUpdate) {
+    public void carregarFilmes() {
         mFilmesView.setCarregando(true);
-        if (forceUpdate) {
-            //mNotesRepository.refreshData();
-        }
-
-        // The network request might be handled in a different thread so make sure Espresso knows
-        // that the app is busy until the response is handled.
-        //EspressoIdlingResource.increment(); // App is busy until further notice
-
 
         mApi.getFilmes(new FilmeServiceApi.FilmeServiceCallback<FilmeResultadoBusca>(){
             @Override

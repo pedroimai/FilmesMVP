@@ -22,7 +22,7 @@ public interface FilmesContract {
 
     interface UserActionsListener {
 
-        void carregarFilmes(boolean forceUpdate);
+        void carregarFilmes();
 
         void abrirDetalhes(@NonNull Filme filme);
     }

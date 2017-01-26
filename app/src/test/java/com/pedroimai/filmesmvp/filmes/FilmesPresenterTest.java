@@ -44,25 +44,23 @@ public class FilmesPresenterTest {
 
     private static FilmeResultadoBusca FILME_RESULTA_BUSCA = new FilmeResultadoBusca(FILMES);
 
-    private static List<Filme> VAZIO = new ArrayList<>(0);
-
+    //Classes MOCKADAS devem utilizar a notação @MOCK
     @Mock
     private FakeFilmeServiceImpl mApi;
 
     @Mock
     private FilmesContract.View mFilmesView;
 
-    /**
-     * {@link ArgumentCaptor} is a powerful Mockito API to capture argument values and use them to
-     * perform further actions or assertions on them.
-     */
+    //IRÁ SIMULAR O COMPORTAMENTO DE UM CALLBACK
     @Captor
     private ArgumentCaptor<FilmeServiceApi.FilmeServiceCallback> mCarregaFilmesCallbackCaptor;
 
     private FilmesPresenter mFilmesPresenter;
 
+    //IRÁ EXECUTAR ANTES DE COMEÇAR OS TESTES
     @Before
-    public void setupNotesPresenter() {
+    public void setupFilmesPresenter() {
+        //inicializa as classes mockadas
         MockitoAnnotations.initMocks(this);
 
         mFilmesPresenter = new FilmesPresenter(mApi, mFilmesView);
@@ -70,49 +68,16 @@ public class FilmesPresenterTest {
 
     @Test
     public void carregaFilmesDaApiEPopulaATela(){
-        mFilmesPresenter.carregarFilmes(true);
+        //carrega filmes
+        mFilmesPresenter.carregarFilmes();
 
+        //callback é capturado e chamado com valores fake
         verify(mApi).getFilmes(mCarregaFilmesCallbackCaptor.capture());
         mCarregaFilmesCallbackCaptor.getValue().onLoaded(FILME_RESULTA_BUSCA);
 
+        //o progress é escondido e os filmes são exibidos na tela
         verify(mFilmesView).setCarregando(false);
         verify(mFilmesView).exibirFilmes(FILME_RESULTA_BUSCA.filmes);
     }
 
-//
-//    @Test
-//    public void loadNotesFromRepositoryAndLoadIntoView() {
-//        // Given an initialized NotesPresenter with initialized notes
-//        // When loading of Notes is requested
-//        mFilmesPresenter.loadNotes(true);
-//
-//        // Callback is captured and invoked with stubbed notes
-//        verify(mNotesRepository).getNotes(mCarregaFilmesCallbackCaptor.capture());
-//        mCarregaFilmesCallbackCaptor.getValue().onNotesLoaded(NOTES);
-//
-//        // Then progress indicator is hidden and notes are shown in UI
-//        verify(mFilmesView).setProgressIndicator(false);
-//        verify(mFilmesView).showNotes(NOTES);
-//    }
-//
-//    @Test
-//    public void clickOnFab_ShowsAddsNoteUi() {
-//        // When adding a new note
-//        mFilmesPresenter.addNewNote();
-//
-//        // Then add note UI is shown
-//        verify(mFilmesView).showAddNote();
-//    }
-//
-//    @Test
-//    public void clickOnNote_ShowsDetailUi() {
-//        // Given a stubbed note
-//        Note requestedNote = new Note("Details Requested", "For this note");
-//
-//        // When open note details is requested
-//        mFilmesPresenter.openNoteDetails(requestedNote);
-//
-//        // Then note detail UI is shown
-//        verify(mFilmesView).showNoteDetailUi(any(String.class));
-//    }
 }
