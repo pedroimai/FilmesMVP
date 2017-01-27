@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pedroimai.filmesmvp.R;
-import com.pedroimai.filmesmvp.data.FilmeServiceImpl;
 import com.pedroimai.filmesmvp.data.model.Filme;
 
 import java.util.ArrayList;
@@ -38,14 +37,11 @@ public class FilmesFragment extends Fragment implements FilmesContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mListAdapter = new FilmesAdapter(new ArrayList<Filme>(0), mItemListener);
-        mActionsListener = new FilmesPresenter(new FilmeServiceImpl(), this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mActionsListener.carregarFilmes();
     }
 
 
@@ -78,23 +74,10 @@ public class FilmesFragment extends Fragment implements FilmesContract.View {
 
     @Override
     public void setCarregando(final boolean ativo) {
-        if (getView() == null) {
-            return;
-        }
-        final SwipeRefreshLayout srl =
-                (SwipeRefreshLayout) getView().findViewById(R.id.refresh_layout);
-
-        srl.post(new Runnable() {
-            @Override
-            public void run() {
-                srl.setRefreshing(ativo);
-            }
-        });
     }
 
     @Override
     public void exibirFilmes(List<Filme> filmes) {
-        mListAdapter.replaceData(filmes);
     }
 
     @Override
@@ -105,7 +88,6 @@ public class FilmesFragment extends Fragment implements FilmesContract.View {
     ItemListener mItemListener = new ItemListener() {
         @Override
         public void onFilmeClick(Filme filme) {
-            mActionsListener.abrirDetalhes(filme);
         }
     };
 
