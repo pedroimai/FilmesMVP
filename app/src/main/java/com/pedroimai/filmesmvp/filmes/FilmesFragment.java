@@ -116,7 +116,7 @@ public class FilmesFragment extends Fragment implements FilmesContract.View {
         public void onBindViewHolder(ViewHolder viewHolder, int position) {
             Filme filme = mFilmes.get(position);
 
-           Picasso.with(viewHolder.thumbnail.getContext())
+            Picasso.with(viewHolder.thumbnail.getContext())
                     .load(filme.posterUrl)
                     .fit().centerCrop()
                     .placeholder(R.drawable.ic_insert_photo_black_48px)
