@@ -2,22 +2,26 @@
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="200dp"
     android:layout_height="200dp"
     android:layout_margin="8dp"
     card_view:cardUseCompatPadding="true">
 
-    <LinearLayout
-        style="@style/Widget.CardContent"
+    <ImageView
+        android:id="@+id/filme_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_insert_photo_black_48px" />
+
+    <TextView
+        android:id="@+id/filme_titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/filme_titulo"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/colorAccent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+        android:layout_gravity="bottom|left"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:padding="16dp"
+        android:background="@color/colorTranslucentBlack"
+        tools:text="Star Wars EP IV - A New Hope" />
 </android.support.v7.widget.CardView>

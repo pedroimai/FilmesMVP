@@ -4,7 +4,6 @@ package com.pedroimai.filmesmvp.filmes;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,13 +12,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pedroimai.filmesmvp.R;
 import com.pedroimai.filmesmvp.data.model.Filme;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class FilmesFragment extends Fragment implements FilmesContract.View {
 
@@ -52,7 +54,7 @@ public class FilmesFragment extends Fragment implements FilmesContract.View {
         RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.filmes_list);
         recyclerView.setAdapter(mListAdapter);
 
-        int numColumns = 2;
+        int numColumns = 1;
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numColumns));
@@ -114,6 +116,12 @@ public class FilmesFragment extends Fragment implements FilmesContract.View {
         public void onBindViewHolder(ViewHolder viewHolder, int position) {
             Filme filme = mFilmes.get(position);
 
+           Picasso.with(viewHolder.thumbnail.getContext())
+                    .load(filme.posterUrl)
+                    .fit().centerCrop()
+                    .placeholder(R.drawable.ic_insert_photo_black_48px)
+                    .into(viewHolder.thumbnail);
+
             viewHolder.titulo.setText(filme.titulo);
         }
 
@@ -137,6 +145,7 @@ public class FilmesFragment extends Fragment implements FilmesContract.View {
 
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+            public ImageView thumbnail;
             public TextView titulo;
             private ItemListener mItemListener;
 
@@ -144,6 +153,7 @@ public class FilmesFragment extends Fragment implements FilmesContract.View {
                 super(itemView);
                 mItemListener = listener;
                 titulo = (TextView) itemView.findViewById(R.id.filme_titulo);
+                thumbnail = (ImageView) itemView.findViewById(R.id.filme_thumbnail);
                 itemView.setOnClickListener(this);
             }
 

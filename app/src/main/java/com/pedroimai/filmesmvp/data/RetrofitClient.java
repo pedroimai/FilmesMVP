@@ -6,10 +6,6 @@ import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Pedro on 24/01/2017.
- */
-
 public class RetrofitClient {
     public static final String BASE_URL = "http://www.omdbapi.com/";
     private static Retrofit retrofit = null;
