@@ -33,14 +33,14 @@ dependencies {
     compile "com.squareup.picasso:picasso:$rootProject.picassoVersion"
 
 
-    // Dependencies for local unit tests
+    // Dependencias para testes unitarios
     testCompile "junit:junit:4.12"
     testCompile "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
     testCompile "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
     testCompile "org.powermock:powermock-module-junit4:$rootProject.ext.powerMockito"
     testCompile "org.powermock:powermock-api-mockito:$rootProject.ext.powerMockito"
 
-    // Android Testing Support Library's runner and rules
+    // Android Testing Support Library's runner e rules
     androidTestCompile "com.android.support.test:runner:$rootProject.ext.runnerVersion"
     androidTestCompile "com.android.support.test:rules:$rootProject.ext.rulesVersion"
 
